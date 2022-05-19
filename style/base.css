@@ -1,0 +1,124 @@
+.res {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 16px;
+}
+
+.res:last-child {
+  margin-bottom: 0px !important;
+}
+
+.res-tag {
+  font-size: 14px;
+  color: grey;
+  margin-bottom: 8px;
+}
+
+.res-content {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.return-obj {
+  font-size: 20px;
+  color: green;
+  font-weight: 600;
+}
+
+.return-obj span {
+  font-weight: 800;
+}
+
+/* Feature List Style START */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  margin: 0px !important;
+  padding: 0px !important;
+  font-weight: 600;
+  font-size: 17px;
+  min-width: 400px;
+  min-height: 300px;
+  max-height: 600px;
+}
+
+.feature-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  margin-bottom: 2px;
+}
+
+.fetch-btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: white;
+  background-color: blueviolet;
+}
+
+.swal2-container {
+  z-index: 2000 !important;
+}
+
+.search-q {
+  padding-bottom: 12px;
+}
+/* Feature List Style END */
+
+/* Login Left Panel Start */
+.fas {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.fa-sign-in-alt:before {
+  content: '\f2f6';
+  font-size: 17px !important;
+  color: var(--jp-inverse-layout-color3) !important;
+}
+
+.login {
+  height: 100%;
+  background: var(--jp-layout-color1) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+.login div {
+  margin-bottom: 12px;
+}
+
+.login-heading {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1em !important;
+}
+/* Login Left Panel End */
+
+/* Tag Modal Start */
+.tag-range {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 1em;
+  margin: 8px 0 16px 0;
+}
+
+.tag-exclude {
+  margin: 8px 0;
+}
+
+.tag-note {
+  font-size: 12px;
+}
+/* Tag Modal End */
