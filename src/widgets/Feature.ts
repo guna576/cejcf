@@ -9,18 +9,18 @@ import { processFeature } from '../utils/ProcessFeature';
 import { FeatureModal } from '../components/FeatureModal';
 import { FetchModal } from '../components/FetchModal';
 import { Progress } from '../components/Progress';
-import { TagModal } from '../components/TagModal';
-import { Cell, ICellModel } from '@jupyterlab/cells';
-import { PushModal } from '../components/PushModal';
+// import { TagModal } from '../components/TagModal';
+// import { Cell, ICellModel } from '@jupyterlab/cells';
+// import { PushModal } from '../components/PushModal';
 
-function containsTag(tag: string, tagList: string[]) {
-  for (let j = 0; j < tagList.length; j++) {
-    if (tagList[j] === tag) {
-      return true;
-    }
-  }
-  return false;
-}
+// function containsTag(tag: string, tagList: string[]) {
+//   for (let j = 0; j < tagList.length; j++) {
+//     if (tagList[j] === tag) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
 
 export class Feature
   implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel>
@@ -70,46 +70,46 @@ export class Feature
         });
     };
 
-    const pushHandler = () => {
-      let featureCode = '';
-      for (let i = 0; i < panel.content.widgets.length; i++) {
-        const cell: Cell = panel.content.widgets[i];
-        const model: ICellModel = cell.model;
+    // const pushHandler = () => {
+    //   let featureCode = '';
+    //   for (let i = 0; i < panel.content.widgets.length; i++) {
+    //     const cell: Cell = panel.content.widgets[i];
+    //     const model: ICellModel = cell.model;
 
-        if (model.type === 'code') {
-          let tagList = model.metadata.get('tags') as string[];
-          if (tagList === undefined) {
-            tagList = [];
-          } else {
-            if (containsTag('existingFeature', tagList)) {
-              featureCode = model.value.text;
-            }
-          }
-        }
-      }
-      const inter = featureCode.split('\n')[0];
-      const fileName =
-        inter.substring(6, inter.length - 1).toLowerCase() + '.py';
+    //     if (model.type === 'code') {
+    //       let tagList = model.metadata.get('tags') as string[];
+    //       if (tagList === undefined) {
+    //         tagList = [];
+    //       } else {
+    //         if (containsTag('existingFeature', tagList)) {
+    //           featureCode = model.value.text;
+    //         }
+    //       }
+    //     }
+    //   }
+    //   const inter = featureCode.split('\n')[0];
+    //   const fileName =
+    //     inter.substring(6, inter.length - 1).toLowerCase() + '.py';
 
-      const widget = new PushModal(featureCode, fileName);
-      widget.title.label = 'React Widget';
-      widget.title.icon = reactIcon;
-      widget.id = 'modal-widget';
-      this.app.shell.add(widget, 'header');
-    };
+    //   const widget = new PushModal(featureCode, fileName);
+    //   widget.title.label = 'React Widget';
+    //   widget.title.icon = reactIcon;
+    //   widget.id = 'modal-widget';
+    //   this.app.shell.add(widget, 'header');
+    // };
 
-    const tagHandler = () => {
-      const tagWidget = new TagModal(panel);
-      tagWidget.title.label = 'React Widget';
-      tagWidget.title.icon = reactIcon;
-      tagWidget.id = 'modal-widget';
-      this.app.shell.add(tagWidget, 'header');
-    };
+    // const tagHandler = () => {
+    //   const tagWidget = new TagModal(panel);
+    //   tagWidget.title.label = 'React Widget';
+    //   tagWidget.title.icon = reactIcon;
+    //   tagWidget.id = 'modal-widget';
+    //   this.app.shell.add(tagWidget, 'header');
+    // };
 
     // Creating Toolbar Button
     const FeatureBtn = new ToolbarButton({
       className: 'feature-btn',
-      label: 'Extract Feature',
+      label: 'Push',
       onClick: featureHandler,
       tooltip: 'Extract Feature'
     });
@@ -117,30 +117,30 @@ export class Feature
     // Creating Toolbar Button
     const FetchBtn = new ToolbarButton({
       className: 'feature-btn',
-      label: 'Fetch Feature',
+      label: 'Fetch',
       onClick: fetchHandler,
       tooltip: 'Fetch Feature'
     });
 
-    const PushBtn = new ToolbarButton({
-      className: 'feature-btn',
-      label: 'Push Feature',
-      onClick: pushHandler,
-      tooltip: 'Push Feature'
-    });
+    // const PushBtn = new ToolbarButton({
+    //   className: 'feature-btn',
+    //   label: 'Push',
+    //   onClick: pushHandler,
+    //   tooltip: 'Push Feature'
+    // });
 
-    const TagCellBtn = new ToolbarButton({
-      className: 'tagcell-btn',
-      label: 'Tag Cells',
-      onClick: tagHandler,
-      tooltip: 'Tag Cells in the specified range'
-    });
+    // const TagCellBtn = new ToolbarButton({
+    //   className: 'tagcell-btn',
+    //   label: 'Tag Cells',
+    //   onClick: tagHandler,
+    //   tooltip: 'Tag Cells in the specified range'
+    // });
 
     // Adding FeatureBtn Button to Notebook Panel
-    panel.toolbar.insertItem(0, 'Extract Feature', FeatureBtn);
-    panel.toolbar.insertItem(1, 'Fetch Feature', FetchBtn);
-    panel.toolbar.insertItem(2, 'Push Feature', PushBtn);
-    panel.toolbar.insertItem(3, 'Tag Cells', TagCellBtn);
+    panel.toolbar.insertItem(11, 'Extract Feature', FeatureBtn);
+    panel.toolbar.insertItem(12, 'Fetch Feature', FetchBtn);
+    //panel.toolbar.insertItem(13, 'Push Feature', PushBtn);
+    // panel.toolbar.insertItem(3, 'Tag Cells', TagCellBtn);
 
     return new DisposableDelegate(() => {
       FeatureBtn.dispose();

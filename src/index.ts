@@ -2,7 +2,7 @@ import {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-import { Login } from './components/Login';
+// import { Login } from './components/Login';
 import { Feature } from './widgets/Feature';
 
 /**
@@ -12,11 +12,11 @@ import { Feature } from './widgets/Feature';
 function activateExtension(app: JupyterFrontEnd): void {
   console.log('JupyterLab Extension Activated');
   app.docRegistry.addWidgetExtension('Notebook', new Feature(app));
-  const widget = new Login();
-  widget.id = 'login-widget';
-  widget.title.iconClass = 'fas fa-sign-in-alt';
-  widget.title.caption = 'Login';
-  app.shell.add(widget, 'left', { rank: 1 });
+  // const widget = new Login();
+  // widget.id = 'login-widget';
+  // widget.title.iconClass = 'fas fa-sign-in-alt';
+  // widget.title.caption = 'Login';
+  // app.shell.add(widget, 'left', { rank: 1 });
 }
 
 const plugin: JupyterFrontEndPlugin<void> = {

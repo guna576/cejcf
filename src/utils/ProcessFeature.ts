@@ -3,9 +3,15 @@ import { NotebookPanel } from '@jupyterlab/notebook';
 
 export function processFeature(panel: NotebookPanel): string {
   let processedFeature = '';
-  let returnObject = '';
+  let processedFeatureImport = '';
+  let processedFeatureModel = '';
+  let returnFeatureObject = '';
+  let returnModelObject = '';
   let featureInput = '';
+  let featureCode = '';
   const codeList: string[] = [];
+  const importList: string[] = [];
+  const modelList: string[] = [];
 
   for (let i = 0; i < panel.content.widgets.length; i++) {
     const cell: Cell = panel.content.widgets[i];
@@ -19,8 +25,18 @@ export function processFeature(panel: NotebookPanel): string {
         if (containsTag('featureCode', tagList)) {
           codeList.push(model.value.text);
         }
-        if (containsTag('returnObject', tagList)) {
-          returnObject = model.value.text;
+        if (containsTag('importCode', tagList)) {
+          importList.push(model.value.text);
+        }
+        if (containsTag('modelCode', tagList)) {
+          modelList.push(model.value.text);
+        }
+
+        if (containsTag('returnFeatureObject', tagList)) {
+          returnFeatureObject = model.value.text;
+        }
+        if (containsTag('returnModelObject', tagList)) {
+          returnModelObject = model.value.text;
         }
         if (containsTag('featureInput', tagList)) {
           featureInput = model.value.text;
@@ -28,20 +44,28 @@ export function processFeature(panel: NotebookPanel): string {
       }
     }
   }
-  if (returnObject) {
-    codeList.push(`return ${returnObject}`);
+  if (returnFeatureObject) {
+    codeList.push(`return ${returnFeatureObject}`);
   }
-  processedFeature = codeList.join('\n\n');
+  if (returnModelObject) {
+    modelList.push(`return ${returnModelObject}`);
+  }
+  processedFeatureImport = importList.join('\n');
+  featureCode = processedFeatureImport + '\n\n';
+
+  processedFeature = codeList.join('\n');
   processedFeature = processedFeature.replace(/^\s+|\s+$/g, '');
-  processedFeature = processedFeature.replace(/^/gm, ' '.repeat(8));
+  processedFeature = processedFeature.replace(/^/gm, ' '.repeat(4));
+  const medSig1 = `def preprocess(${featureInput}):\n`;
+  processedFeature = medSig1 + processedFeature;
+  featureCode += processedFeature + '\n\n';
 
-  let featureCode = 'class FeatureClass:\n';
-  featureCode += ' '.repeat(4) + 'def __init__(self, featureName="feature"):\n';
-  featureCode += ' '.repeat(8) + 'self.name = featureName\n\n';
-  const medSig = `def processFeature(self, ${featureInput}):\n`;
-  featureCode += ' '.repeat(4) + medSig;
-
-  featureCode += processedFeature;
+  processedFeatureModel = modelList.join('\n');
+  processedFeatureModel = processedFeatureModel.replace(/^\s+|\s+$/g, '');
+  processedFeatureModel = processedFeatureModel.replace(/^/gm, ' '.repeat(4));
+  const medSig2 = `def model(${featureInput}):\n`;
+  processedFeatureModel = medSig2 + processedFeatureModel;
+  featureCode += processedFeatureModel;
 
   return featureCode;
 }

@@ -1,4 +1,4 @@
-import { Cell, ICellModel } from '@jupyterlab/cells';
+// import { Cell, ICellModel } from '@jupyterlab/cells';
 import { NotebookActions, NotebookPanel } from '@jupyterlab/notebook';
 import Swal from 'sweetalert2';
 import {
@@ -37,26 +37,26 @@ export function fetchFeature({ featureName, panel }: FetchProps): any {
       panel.content.activeCellIndex = panel.content.widgets.length - 1;
       NotebookActions.insertBelow(panel.content);
       NotebookActions.replaceSelection(panel.content, data);
-      NotebookActions.run(panel.content, panel.context.sessionContext);
-      const cell: Cell =
-        panel.content.widgets[panel.content.widgets.length - 1];
-      const model: ICellModel = cell.model;
-      const newList: string[] = [];
-      newList.push('existingFeature');
-      model.metadata.set('tags', newList);
+      // NotebookActions.run(panel.content, panel.context.sessionContext);
+      // const cell: Cell =
+      //   panel.content.widgets[panel.content.widgets.length - 1];
+      // const model: ICellModel = cell.model;
+      // const newList: string[] = [];
+      // newList.push('existingFeature');
+      // model.metadata.set('tags', newList);
 
-      let className = '';
-      for (let i = 6; i < data.length; i++) {
-        if (data[i] === ':') {
-          break;
-        }
-        className += data[i];
-      }
+      // let className = '';
+      // for (let i = 6; i < data.length; i++) {
+      //   if (data[i] === ':') {
+      //     break;
+      //   }
+      //   className += data[i];
+      // }
 
-      const obj = 'obj = ' + className + '()';
-      NotebookActions.insertBelow(panel.content);
-      NotebookActions.replaceSelection(panel.content, obj);
-      NotebookActions.run(panel.content, panel.context.sessionContext);
+      // const obj = 'obj = ' + className + '()';
+      // NotebookActions.insertBelow(panel.content);
+      // NotebookActions.replaceSelection(panel.content, obj);
+      // NotebookActions.run(panel.content, panel.context.sessionContext);
     })
     .catch(err => {
       console.log(err);

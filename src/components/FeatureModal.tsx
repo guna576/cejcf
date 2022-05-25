@@ -88,7 +88,7 @@ function ModalComponent({ code, panel }: ModalProps) {
   const [pascal, setPascal] = useState('');
   const handleClose = () => setOpen(false);
   const handleOpenInput = () => setOpenInput(true);
-  const handleOpenTest = () => setOpenTest(true);
+  // const handleOpenTest = () => setOpenTest(true);
   const handleCloseTest = () => setOpenTest(false);
   const handleCloseInput = () => setOpenInput(false);
   const handleOpenBackdrop = () => setBackdropOpen(true);
@@ -194,14 +194,14 @@ function ModalComponent({ code, panel }: ModalProps) {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button
+          {/* <Button
             onClick={() => {
               handleClose();
               handleOpenTest();
             }}
           >
             Test Code
-          </Button>
+          </Button> */}
           <Button
             autoFocus
             onClick={() => {
