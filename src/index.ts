@@ -17,7 +17,7 @@ function activateExtension(app: JupyterFrontEnd): void {
   // widget.title.iconClass = 'fas fa-sign-in-alt';
   // widget.title.caption = 'Login';
   // app.shell.add(widget, 'left', { rank: 1 });
-}
+}0.
 
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'mlops-assist:plugin',
